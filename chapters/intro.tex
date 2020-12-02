@@ -45,7 +45,7 @@ A verziókezelő szerves részeit képzik a modern szoftverfejlesztésnek. A fej
 
 De mi is pontosan egy verziókezelő? Egy verziókezelő szoftver célja, hogy a forráskódon történő változtatások mindig világosan visszakövethetőek legyenek, egyértelműen látszódjon a változtatás előtti és utáni állapot és a forráskód akármelyik állapota akármikor elérhető és visszaállítható legyen. Fontos továbbá az is, hogy a verziókezelő rendszerek úgynevezett branch-ek használatával elősegítik, hogy egy fejlesztő csapat minden tagja képes legyen ugyanazokon a fájlokon más-más változtatásokat végrehajtani úgy, hogy a potenciálisan létrejött konfliktusokat csak egyszer kell feloldani.
 
-Koncepcionálisan a verziókezelőket, illetve az azokban tárolt forráskódot nagyon komplex gráfként érdemes elképzelni, ahol minden csúcs a forráskód egy bizonyos állapota.
+Koncepcionálisan a verziókezelőket, illetve az azokban tárolt forráskódot nagyon komplex gráfként érdemes elképzelni, amelynek minden csúcsa a forráskód egy bizonyos állapota.
 
 A legismertebb verziókezelők:
 \begin{itemize}
@@ -59,11 +59,16 @@ Terminológia szempontjából a következők lesznek fontosak:
     \item \textit{Repository}: egy megosztott adatbázis, ami tartalmazza a verziókezelt forráskód összes különböző verziójának állapotát
     \item \textit{Commit}: változtatások egy halmaza, ami a forráskód egy korábbi változatát egy új verzióra képezi le
     \item \textit{Branch}: a forráskód egy bizonyos commit-járól való leágazás, ami egy, a szülő branch-től független commit történettel fog rendelkezni a vágási ponttól
+    \item \textit{Author}: egy commit változtatásaihoz rendelt szerző
 \end{itemize}
 
-\subsection{A legnépszerűbb verziókezelő - git}
+\subsection{A legnépszerűbb verziókezelő - git}\label{section:git}
 
-Az elmúlt évtizedben a git messze kiemelkedett
+A git fejlesztése 2005-ben indult Linus Torvalds vezetésével, miután a Linux kernel által használt zárt forráskódú BitKeeper verziókezelő rendszer fizetőssé vált. Ebben az érában a verziókezelő rendszerek a zárt forráskód-kiforrott funkcionalitás, nyílt forráskód-kiforratlan funkcionalitás párosok által képzett két halmazba tartoztak.
+
+A git dizájnját a BitKeeper pozitívumai vezérlték: a merge és fork operációk legyenek egyszerűen végrehajtható műveletek, ellentétben a fő versenytársakkal, mint a CVS és az SVN, ahol többek között a materializált branch-ek nehezítették ezeket a műveleteket.
+
+Az igazi áttörést a git-nek a 2008-ban alapított GitHub hozta meg: a 2008-as és 2014-es évek között a GitHub-on tárolt repository-k száma exponenciálisan növekedett évről évre. 2014-re a git beérte az SVN-t, 2020-ra pedig már közel háromszor annyi git-en tárolt repository-t tartott számon a nyílt forráskódú közösség, mint SVN-en.
 
 \begin{figure}[H]
     \centering
@@ -80,17 +85,28 @@ Az elmúlt évtizedben a git messze kiemelkedett
 \end{figure}
 
 
-Hála az open source közösség által felkarolt GitHub-nak, az elmúlt évtizedben a git lett az ipar de facto verziókezelője. A korábban említett alternatívákkal szemben a git teljesen decentralizált, ami azt jelenti, hogy nincs egy központi igazságként szolgáló repository, hanem egy git repository minden másolata teljes értékű. Természetesen mivel másolatokról beszélünk, ez implikálja, hogy mégis van egy
+Manapság a git a de factor verziókezelő rendszer mind ipari, mind nyílt forráskódú környezetekben, amitől csak nagyon specializált esetekben szokás eltérni -- ilyenek például az egyes tech óriások monorepository-jai, amik a cég teljes forráskódját hivatottak tárolni (ezek a cégek általában saját fejlesztésű verziókezelőt használnak), vagy az olyan projektek, ahol binárisok is verziókövetve vannak (a git teljesítményét már viszonylag kis mennyiségű követett bináris is nagyon érzékenyen érinti).
+
+Korábban már tisztáztunk pár alapvető koncepciót a verziókezelőkkel kapcsolatban, azonban a git megértéséhez pár másikról is szót kell ejteni.
+
+\begin{itemize}
+    \item \textit{Decentralized Version Control}: decentralizált verziókezelő alatt azt kell érteni, hogy minden fejlesztő gépén egy teljes értékű repository található, ami képes teljesen önálló működésre központi szerver nélkül. Ez szöges ellentéte például a Perforce-nak, ahol a depo és a fejlesztő gépén lévő repository között gyakorlatilag folyamatos interakcióra van szükség
+    \item \textit{Working copy}: egy git repository másolata
+    \item \textit{Staging area}: a working copy-n végrehajtott változtatásokat a staging area-ba kell mozgatni, mielőtt azok egy commit-ba kerülhetnek, tehát egy
+    \item \textit{Remote}: egy, a lokálistól különböző git repository, aminek a branch-eivel a push és pull műveletekkel tudunk interakcióba lépni. Fontos, hogy egy remote koncepcionálisan nem egy központi repository-t jelent, még akkor sem, ha gyakorlatban az szokott lenni -- egy remote lehet akár csak egy lokálisan tárolt másik másolata a repository-nak, a lényeg, hogy git repository legyen
+    \item \textit{Push}: "toljuk fel" a lokális history-t a push-nak megadott távoli branch felé
+    \item \textit{Pull}: a push-al ellentétes művelet. Húzzunk le a remote egy adott branch-éről az ott lévő history-t a working copy-ba.
+\end{itemize}
 
 \subsection{Code smell-ek nyomai a verziókezelőben}
 
-Itt az ideje részleteiben kitérni a \textit{Software Design X-Rays}\cite{tornhillXrays} kapcsán már említett git statisztikákra, illetve a
+Itt az ideje részleteiben kitérni a \textit{Software Design X-Rays}\cite{tornhillXrays} kapcsán már említett git statisztikákra. Ugyan korábban és a későbbiekben is git statisztikaként hivatkozom az itt prezentált statisztikákra, azt fontos itt megjegyezni, hogy ezek tökéletesen alkalmazhatóak akármelyik másik verziókezelő szoftverre is, ami érti valamilyen formában a commit, history és author koncepciókat. A git azonban, ahogy a \ref{section:version_control} fejezet taglalta, messze a legnépszerűbb veriókezelő rendszer 2020-ban, ezért már csak statisztikai alapon is erre esik a választás.
 
-Egy modern kutatás, ami kifejezetten a code smell-ek empirikus felismerésével foglakozik 2015-ben került publikálásra M. Tufano et al., "When and Why Your Code Starts to Smell Bad"\cite{codeSmells}.
+Egy kutatás, ami kifejezetten a code smell-ek empirikus felismerésével foglakozik 2015-ben került publikálásra M. Tufano et al., "When and Why Your Code Starts to Smell Bad"\cite{codeSmells}.
 
 \section{Tesztelés}
 
-A modern szoftverfejlesztés egyik legnagyobb előrelépése
+A modern szoftverfejlesztés egyik legnagyobb előrelépése az volt, hogy sikerült már az átlag fejlesztő fejébe is beültetni azt az egyszerű gondolatot, hogy az automatizált tesztelés minden projekten kritikus. Továbbá azt is egyre többen kezdik megérteni, hogy a teszt kód ugyanannyira fontos, mint az éles kód: a tesztek egyfajta kettős könyvelésként működnek a szoftverfejlesztés világában.
 
 \begin{figure}[H]
     \centering
@@ -114,7 +130,12 @@ Közvetlenül az E2E tesztek alatt helyezkednek el az integration tesztek.
 
 \subsection{Unit tesztelés}
 
-A tesztelési piramis legalsó szintjén található a unit tesztelés. \textit{Unit test} alatt jellemzően egy olyan tesztet értünk, ami izolációban teszteli egy nagyon specifikus részét a kódnak. A pontos definíció ebben az esetben erősen vitatott, mert gyakorlatban a unit tesztelésnek több különböző stílusa létezik. Jellemzően ezek a stílusok eltérnek az izoláció mértékében, a tesztelt kód specificitásában és az ellenőrzések formájában is. Sok projekt továbbá kombinálja ezeket a különböző stílusokat az alkalmazás különböző rétegeiben.
+A tesztelési piramis legalsó szintjén található a unit tesztelés. \textit{Unit teszt} alatt egy olyan tesztet értünk, ami izolációban teszteli egy nagyon specifikus részét a kódnak. A pontos definíció ebben az esetben erősen vitatott, mert gyakorlatban a unit tesztelésnek több különböző stílusa létezik. Jellemzően ezek a stílusok eltérnek az izoláció mértékében, a tesztelt kód specificitásában és az ellenőrzések formájában is. Sok projekt továbbá kombinálja ezeket a különböző stílusokat az alkalmazás különböző rétegeiben.
+
+Definíciótól függetlenül azonban a unit tesztek célja világos: bizonyítsuk, hogy a kód, amit írtunk tényleg úgy viselkedik, ahogy szeretnénk és ez a verifikáció legyen könnyen és gyorsan megismételhető.
+
+Ellentétben a korábban már említett integrációs és E2E tesztekkel, a unit tesztek fehér doboz tesztek, ami azt jelenti, hogy a teszt maga részleteiben ismeri a tesztelt kódot, hiszen direkt interakcióban van vele
+
 
 \begin{figure}[H]
     \centering
@@ -130,7 +151,6 @@ A tesztelési piramis legalsó szintjén található a unit tesztelés. \textit{
     \label{fig:unit-test-run-example}
 \end{figure}
 
-Definíciótól függetlenül azonban a unit tesztek célja világos: bizonyítsuk, hogy a kód, amit írtunk tényleg úgy viselkedik, ahogy szeretnénk. Tekinthetünk az ilyen tesztekre a szoftverfejlesztési világ kettős könyveléseként
 
 \subsection{Teszt coverage}
 
@@ -150,7 +170,7 @@ Tisztáztuk a korábbiakban a tesztelés alapvető célját és a különböző 
     \label{fig:codecov-example}
 \end{figure}
 
-Technikailag a tesztelési piramis minden szintjéből képezhető egy coverage report, de ahogy haladunk felfelé a hierarchiában, ez egyre nehezebb és kevésbé releváns lesz.
+Technikailag a tesztelési piramis minden szintjéből generálható coverage report, de ahogy haladunk felfelé a hierarchiában, ez egyre nehezebb és kevésbé releváns lesz.
 
 \section{A teszt coverage és git statisztikák közös vizsgálata}
 
