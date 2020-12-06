@@ -3,11 +3,75 @@
 
 \section{Vizsgált kódbázisok}
 
+Egy kódbázisnak a következő feltételeket kell teljesíteni, hogy vizsgálni tudjuk:
+\begin{enumerate}
+    \item Legyen könnyen build-elhető, évekre visszamenően
+    \item A tesztek legyenek könnyen futtathatóak
+    \item Generálódjon coverage report a teszt futtatásokhoz és a report formátuma legyen egyike azoknak, amiket támogat a ReportGenerator\footnote{https://github.com/danielpalme/ReportGenerator} nevű .NET-es könyvtár
+    \item A projekt legyen nyílt forráskódú
+    \item Rendelkezzen a projekt viszonylag gazdag commit történettel -- jelen esetben az 5000+ commit és 3+ éves történet heurisztikát alkalmaztam
+\end{enumerate}
+
+Ezeket a feltételeket ugyan könnyű teljesíteni egy fejlesztő csapatnak ipari környezetben saját projektekre, sajnos nyílt forráskódú környezetben más a helyzet -- specifikusan az 1-es és 3-as pontok jelentenek problémát. A C++-ra, Python-ra és .NET Framework-re épülő projektek például egy az egyben kiesnek, mert egyik sem ad egyszerű módot arra, hogy a build-eléshez szükséges környezetet könnyen elő tudjuk állítani a projekt életciklusának akármely pontján.
+
+Gyakorlatban a JavaScript NodeJS/NPM, .NET Core/.NET 5+ és Java ökoszisztémákra épülő projektek felelhetnek meg a korábbi feltételeknek. Ezek közül azonban a Java a szakmai hátterem miatt kiesik, a .NET Core/5+ projektek jelentős többsége pedig az 5-ös feltételt nem teljesíteni, így marad a JavaScript Node/NPM ökoszisztéma. A specifikus projekteknél külön meg fogom említeni, de általánosságban itt is leírom: még a JavaScript/NodeJS/NPM ökoszisztéma esetén is komoly problémát jelent a régi (~2015 előtti) verziók build-elése, mivel az NPM és a node, illetve a rájuk épített projektek sok változáson estek át az évek során, amit ma a projekt ismerete nélkül már nehéz reprodukálni. Ez azt jelenti, hogy a legtöbb esetben lehetetlen
+
+Fontos leszögezni még egy dolgot. A JavaScript-es projektek elemzése egy jelentős vakfoltot fog képezni, méghozzá azért, mert a nyílt forráskódú projektek között gyakorlatilag lehetetlen olyat találni, amire őszintén azt lehet mondani, hogy rossz minőségű kódbázissal rendelkezik. Nyilván egy kódbázis minősége szubjektív, de a GitHub-on host-olt JavaScript projektek túlnyomó többsége 95\% feletti coverage-el rendelkezik. Ráadásul azok a projektek, amik 95\% alatt vannak, azok jellemzően csak a nagyon konzervatív coverage ignore path-ok miatt mutatnak ilyen értékeket -- a React projekt például 80\% körüli értéket mutatott, azonban hamar kiderült, hogy ez csak azért van, mert halott kódot tartanak a repository-ban, amit már nem hajtanak meg unit tesztek.
+
+A fentieket figyelembe véve a következő projektekre esett a választás:
+\begin{itemize}
+    \item Vue: https://github.com/vuejs/vue
+    \item Express: https://github.com/expressjs/express
+    \item React: https://github.com/facebook/react
+    \item Gatsby: https://github.com/gatsbyjs/gatsby
+\end{itemize}
+
+\section{Vue}
+
+Elsőként a vue.js\footnote{https://github.com/vuejs/vue} kódbázisát fogjuk megvizsgálni. A Vue egy progresszív, JavaScript-alapú frontend framework. A Vue feature-ök tekintetében valahol a később taglalt Angular és React között van -- nem próbál egy kikövezett utat adni, mint az Angular, de nem csak egy specifikus szeletét fedi le a frontend fejlesztésnek, mint a React.
+
+\lstset{language=HTML, caption={Egy egyszerű Vue komponens}}
+\begin{lstlisting}
+<div id="app">
+    {{ message }}
+</div>
+\end{lstlisting}
+
+\lstset{language=JavaScript, caption={Egy egyszerű Vue komponens}}
+\begin{lstlisting}
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    }
+})
+\end{lstlisting}
+
+A projekt viszonylag fiatal, fejlesztése 2016-ban kezdődött. A későbbi megfigyelések szempontjából fontos megjegyezni, hogy ugyan jelen pillanatban 338 egyedi kontribútora van a projektnek, a fejlesztés nagy része egy fejlesztőhöz, Evan You nevéhez köthető:
+
+\lstset{caption={A vue.js top 10 kontribútora}}
+\begin{lstlisting}
+vue git:(dev) git shortlog -sn | head -n10
+    2303  Evan You
+    78  vue-bot
+    47  Hanks
+    34  Eduardo San Martin Morote
+    32  kazuya kawaguchi
+    30  chengchao
+    25  katashin
+    21  AchillesJ
+    18  Herrington Darkholme
+    15  JK
+\end{lstlisting}
+
+Az analízist az összes projekt esetében az első publikus release-től kezdjük.
+
+\subsection{Vue 1.0}
+
+
 \section{Angular}
 
 \section{React}
-
-\section{Vue}
 
 \section{Eddigi megfigyelések}
 

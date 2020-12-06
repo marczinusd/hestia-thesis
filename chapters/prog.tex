@@ -54,7 +54,7 @@ A felépített modellt a program Entity Framework Core segítségével tetszőle
 
 A repository analízisek gyors, könnyen ismételhető futtatása kritikus követelménye volt a projektnek. Eleinte egy grafikus futtató felülettel kísérleteztem, de hamar kiderültek a hátrányai (nevezetesen az ismételhetőség volt problémás), így a konzolos futtatás maradt az egyetlen opció. Egy repository-ra mindössze egy relatíve egyszerű konfigurációs fájlt kell létrehozni az alábbi formátumban, amit a futtató végre tud hajtani:
 
-\lstset{caption={A React projekt Hestia konfigurációja}, label=src:cpp}
+\lstset{caption={A React projekt Hestia konfigurációja}, language=json, numberstyle=\small}
 \begin{lstlisting}
 {
   "$schema": "https://raw.githubusercontent.com/marczinusd/hestia/master/src/Hestia.ConsoleRunner/config.schema.json",

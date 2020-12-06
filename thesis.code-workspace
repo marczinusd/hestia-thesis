@@ -27,7 +27,10 @@
       "thesis.bbl": true,
       "thesis.log": true,
       "**/*__latexindent*": true,
-      "**/*.pdf": true
+      "**/*Zone.Identifier": true,
+      "**/*.log": true,
+      "**/images/*.pdf": true,
+      "thesis.pdf": true
     },
     "files.autoSave": "onFocusChange",
     "latex-workshop.latex.autoBuild.run": "onSave",
