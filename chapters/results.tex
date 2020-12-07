@@ -62,10 +62,9 @@ vue git:(dev) git shortlog -sn | head -n10
     21  AchillesJ
     18  Herrington Darkholme
     15  JK
-\end{lstlisting}
+\end{lstlisting}\label{code:vue-authors}
 
 Az analízist a vue esetében az első publikus release-től kezdjük.
-\pagebreak
 
 \subsection{Vue 1.0}
 
@@ -92,41 +91,50 @@ Először vessünk egy pillantást a \ref{table:vue1-top-files} táblázatra, am
     \caption{A vue 1.0-ás kiadásának leggyakrabban módosított fájljai} \label{table:vue1-top-files}
 \end{table}
 
-\begin{figure}[H]
+Érdekes továbbá a változtatások számáról készített hisztogram a \ref{fig:vue1-hist} ábrán, amiről jól látszik, hogy a 67 forrás fájlból álló vue 1.0 változtatásainak egy jelentős része 5 fájl köré csoportosul, amik méret és változtatás szám szepontjából már most az átlag többszörösét mutatják.
+
+\begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue1-hist.png}
     \caption{Fájlonkénti változtatások számának a hisztogramja}
     \label{fig:vue1-hist}
 \end{figure}
 
-Érdekes továbbá a változtatások számáról készített hisztogram a \ref{fig:vue1-hist} ábrán, amiről jól látszik, hogy a 67 forrás fájlból álló vue 1.0 változtatásainak egy jelentős része 5 fájl köré csoportosul, amik méret és változtatás szám szepontjából már most az átlag többszörösét mutatják.
-
-
+A \ref{fig:vue1-cov-changes} ábra mutatja a teljes repository-n a fájlonkénti változtatások számát csökkenő sorrendben, illetve a másodlagos tengelyen látható a fájlonkénti coverage. A coverage egyelőre 100\% a teljes projekten. A változtatások számára illesztett görbét érdemes megjegyezni, mert visszatérő motívum lesz a többi analízis során is.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue1-lifetime-changes.png}
-    \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \caption{A coverage és az összes változtatások számának alakulása a vue 1.0 esetében}
+    \label{fig:vue1-cov-changes}
 \end{figure}
+
+A \ref{fig:vue1-changes-lines} az egyéni fájlok változtatási számát és a fájlok méretét ábrázolja. Bár van néhány fájl, mint például a \code{vue.js} és a \code{directive.js}, amik a sok változtatás ellenére kis méretűek, a kódbázis nagy részére igaz, hogy minél több módosítás tartozik egy fájlhoz, annál nagyobb -- számszerűsítve a korreláció a két adatsor között 0,59 a vue 1.0 esetében.
+
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue1-lifetimechanges-authors.png}
     \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \label{fig:vue1-changes-authors}
 \end{figure}
+
+Végezetül a \ref{fig:vue1-changes-authors} ábra a fájlok változtatási számát és az egyedi szerzők számát mutatja. A vue ebből a szempontból különleges eset, mert ahogy a \ref{code:vue-authors} kimenetén láttuk a projekt jelentős részben egy fejlesztő kezében van és ez kiemelten igaz az 1.0-ra. A két adatsor között a vue 1.0 esetében a korreláció 0,27.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue1-lines-lifetimechanges.png}
     \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \label{fig:vue1-changes-lines}
 \end{figure}
 
 \pagebreak
 
-\subsection{Vue 2.x}
+\subsection{Vue 2.0}
+
+A vue 2.0 alig több, mint egy évvel a vue 1.0 után jelent meg, azonban teljes újraírása volt a projektnek, így az 1.0-ban látott adatokkal csak néhány esetben fogunk tudni párhuzamot vonni. A \ref{table:vue2-top-files} táblázat mutatja, hogy a vue 2.0 esetében melyek a legtöbbet változtatott fájlok.
+
+Külön felhívnám a figyelmet a \code{compiler/parser/index.js} és \code{compiler/codegen/index.js} fájlokra és nem csak azért, mert ez a két legtöbbet változtatott fájl. Ezek a fájlok ismerősek lehetnek a vue 1.0-nál látott \code{compile.js} miatt, ami mint az látható a \ref{table:vue1-top-files} táblázatból az akkori állapot legtöbbet változtatott fájlja. Ugyan a git szempontjából nincs reláció a \code{compile.js}, \code{compiler/parser/index.js} és \code{compiler/codegen/index.js} fájlok között, ránézésre azonban hamar kiderül, hogy a \code{compile.js} tovább él a 2.0-ban, két külön fájlra bontva. Ez már most egy érdekes trendet mutat: hiába lett refactor-olva a \code{compile.js}, a szétbontott fájlok pontosan ugyanazt a mintát mutatják, mint az elődjük.
 
 \begin{table}[h]
     \hspace*{-1cm}\begin{tabular}{l|l|l|l|l}
@@ -142,7 +150,7 @@ Először vessünk egy pillantást a \ref{table:vue1-top-files} táblázatra, am
         web-runtime-with-compiler.js & 3                & 33               & 84         & 100         \\
         core/index.js                & 1                & 31               & 13         & 100
     \end{tabular}
-    \caption{A vue 1.0-ás kiadásának leggyakrabban módosított fájljai} \label{table:vue2-top-files}
+    \caption{A vue 2.0-ás kiadásának leggyakrabban módosított fájljai} \label{table:vue2-top-files}
 \end{table}
 
 \begin{figure}[H]
@@ -166,11 +174,39 @@ Először vessünk egy pillantást a \ref{table:vue1-top-files} táblázatra, am
     \label{fig:hestia-charts}
 \end{figure}
 
-\subsubsection{Átfedések vue 1.x és 2.0 között}
+\subsection{Trendek a vue 2.0, 2.4 és a legfrissebb verzió között}
+
+Mielőtt levonnánk néhány tanulságot, nézzük meg, hogy hogyan alakult a vue kódbázisa a 2016-ban megjelent 2.0-ás verzió és a jelenlegi éles verzió között. A \ref{tab:vue-changes-comp} táblázat mutatja a fájlok módosítási számát 2.0.1 és a legfrissebb verzió között, a 2.0.1-es változtatási szám szerinti csökkenő sorrendben. Ugyan ez a táblázat csak a top 10 fájlt mutatja, de itt is egyértelműen látszódik egy trend, ami egyébként a teljes, 90 fájlból álló kódbázisra is igaz: ha egy fájlt sokat kellett módosítani a projekt életciklusának elején, akkor sokat kellett módosítani később is, amíg a keveset változtatott fájlok jellemzően kevés változtatásra szorulnak a teljes életciklusuk alatt. Nem meglepő módon így a korreláció a 2.0.1-es és legfrissebb verzió vátlzotatási számai között nagyon magas, 0,965.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|l|l|l|l}
+        Filename                  & 2.0.1 & 2.4.0 & master & delta \\ \hline
+        compiler/parser/index.js  & 93    & 149   & 206    & 113   \\
+        compiler/codegen/index.js & 72    & 121   & 160    & 88    \\
+        render.js                 & 67    & 105   & 122    & 55    \\
+        create-component.js       & 56    & 91    & 112    & 56    \\
+        patch.js                  & 54    & 92    & 119    & 65    \\
+        transition.js             & 47    & 68    & 73     & 26    \\
+        lifecycle.js              & 45    & 76    & 96     & 51    \\
+        core/index.js             & 31    & 47    & 48     & 17    \\
+        render.js                 & 30    & 60    & 72     & 42    \\
+        transition.js             & 30    & 49    & 54     & 24
+    \end{tabular}
+    \caption{A vue.js legtöbbet változtatott fájljai 2.0 és az aktuális verzió között}
+    \label{tab:vue-changes-comp}
+\end{table}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue-all-lifetime-changes.png}
+    \caption{A vékony kliens által generált grafikonok}
+    \label{fig:hestia-charts}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/vue/vue-all-lifetime-changes-comp-full.png}
     \caption{A vékony kliens által generált grafikonok}
     \label{fig:hestia-charts}
 \end{figure}
@@ -196,7 +232,9 @@ Először vessünk egy pillantást a \ref{table:vue1-top-files} táblázatra, am
     \label{fig:hestia-charts}
 \end{figure}
 
-\begin{table}[]
+
+
+\begin{table}[h]
     \centering
     \begin{tabular}{l|l|l|l}
                                           & v2.0.0 & v2.4.0 & dev  \\ \hline
