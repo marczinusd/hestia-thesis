@@ -37,7 +37,7 @@ Elsőként a vue.js\footnote{https://github.com/vuejs/vue} kódbázisát fogjuk 
 </div>
 \end{lstlisting}
 
-\lstset{language=JavaScript, caption={Egy egyszerű Vue komponens}}
+\lstset{language=JavaScript, caption={Egy egyszerű Vue komponens JS kódja}}
 \begin{lstlisting}
 var app = new Vue({
     el: '#app',
@@ -115,7 +115,7 @@ A \ref{fig:vue1-changes-lines} az egyéni fájlok változtatási számát és a 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue1-lifetimechanges-authors.png}
-    \caption{A vékony kliens által generált grafikonok}
+    \caption{Fájlok módosítási számai és egyedi szerzőinek száma a vue 1.0 esetében}
     \label{fig:vue1-changes-authors}
 \end{figure}
 
@@ -124,7 +124,7 @@ Végezetül a \ref{fig:vue1-changes-authors} ábra a fájlok változtatási szá
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue1-lines-lifetimechanges.png}
-    \caption{A vékony kliens által generált grafikonok}
+    \caption{Fájlok módosítási számai és méretük a vue 1.0 esetében}
     \label{fig:vue1-changes-lines}
 \end{figure}
 
@@ -153,30 +153,36 @@ Külön felhívnám a figyelmet a \code{compiler/parser/index.js} és \code{comp
     \caption{A vue 2.0-ás kiadásának leggyakrabban módosított fájljai} \label{table:vue2-top-files}
 \end{table}
 
+A \code{compile.js} utódait leszámítva azonban a vue 2.0 kódbázisa a \ref{fig:vue2-lifetime-changes} ábra alapján érezhetően kevésbé polarizált fájl módosítási számok tekintetében, mint a 1.0-ás kiadásban volt. Azt nehéz viszont megítélni, hogy ez fedi-e a valóságot, vagy csak a git technikalitása a teljes újraírás miatt, hiszen láttuk, hogy a \code{compile.js} két utódja teljesen tiszta lappal indult és ugyanez a minta előfordulhat kevésbé egyértelmű szituációkban is.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue2-lifetime-changes.png}
-    \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \caption{Fájlok módosítási számai a vue 2.0.1 esetében}
+    \label{fig:vue2-lifetime-changes}
 \end{figure}
+
+A módosítási számok hisztogramja a \ref{fig:vue2-hist} nagyon hasonló képet fest a korábbiakban látottakhoz. A 2.0 kódbázisának túlnyomó többsége ismét a ritkán módosított fájlokba tömörül, azonban a leggyakrabban módosított felső 10\% újfent az átlagos módosítási szám sokszorosát produkálja.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue2-hist.png}
-    \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \caption{Fájlok módosítási számának hisztogramja a vue 2.0.1 esetében}
+    \label{fig:vue2-hist}
 \end{figure}
+
+Végül vegyük szemre a \ref{fig:vue2-lines-changes} ábrát, ami a fájlok módosítási számait és méretét mutatja. Ellentétben az 1.0-ban látottakkal, a 2.0 kódbázisa esetében a fájlok méretéből rajzolt görbe sokkal közelebb követi le a módosítási számokból rajzolt görbét.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue2-lines-lifetimechanges.png}
     \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \label{fig:vue2-lines-changes}
 \end{figure}
 
 \subsection{Trendek a vue 2.0, 2.4 és a legfrissebb verzió között}
 
-Mielőtt levonnánk néhány tanulságot, nézzük meg, hogy hogyan alakult a vue kódbázisa a 2016-ban megjelent 2.0-ás verzió és a jelenlegi éles verzió között. A \ref{tab:vue-changes-comp} táblázat mutatja a fájlok módosítási számát 2.0.1 és a legfrissebb verzió között, a 2.0.1-es változtatási szám szerinti csökkenő sorrendben. Ugyan ez a táblázat csak a top 10 fájlt mutatja, de itt is egyértelműen látszódik egy trend, ami egyébként a teljes, 90 fájlból álló kódbázisra is igaz: ha egy fájlt sokat kellett módosítani a projekt életciklusának elején, akkor sokat kellett módosítani később is, amíg a keveset változtatott fájlok jellemzően kevés változtatásra szorulnak a teljes életciklusuk alatt. Nem meglepő módon így a korreláció a 2.0.1-es és legfrissebb verzió vátlzotatási számai között nagyon magas, 0,965.
+Mielőtt levonnánk néhány tanulságot, nézzük meg, hogy hogyan alakult a vue kódbázisa a 2016-ban megjelent 2.0-ás verzió és a jelenlegi, 2020-as éles verzió között. A \ref{tab:vue-changes-comp} táblázat mutatja a fájlok módosítási számát 2.0.1 és a legfrissebb verzió között, a 2.0.1-es változtatási szám szerinti csökkenő sorrendben. Ugyan ez a táblázat csak a top 10 fájlt mutatja, de itt is egyértelműen látszódik egy trend, ami egyébként a teljes, 90 fájlból álló kódbázisra is igaz: ha egy fájlt sokat kellett módosítani a projekt életciklusának elején, akkor sokat kellett módosítani később is, amíg a keveset változtatott fájlok jellemzően kevés változtatásra szorulnak a teljes életciklusuk alatt. Nem meglepő módon így a korreláció a 2.0.1-es és legfrissebb verzió vátlzotatási számai között nagyon magas, 0,965.
 
 \begin{table}[h]
     \centering
@@ -197,42 +203,50 @@ Mielőtt levonnánk néhány tanulságot, nézzük meg, hogy hogyan alakult a vu
     \label{tab:vue-changes-comp}
 \end{table}
 
+A \ref{fig:vue-all-files-lifetime-changes} ábra új rendezési szempont szerint mutatja be a projekt összes fájlját módosítások száma szerint, a legújabb verzióban megfigyelt érték szerint csökkenő sorrendben. Ezen az ábrán két nagyon szembetűnő tény figyelhető meg:
+\begin{itemize}
+    \item A fájlok módosítási számai közötti erőviszonyok négy évnyi változtatás során sem változtak, a polarizáltság változatlanul nagyon magas
+    \item Új változási gócpontot képező fájlok nem alakultak ki
+\end{itemize}
+
+A \ref{fig:vue-all-delta-hist} hisztogram a vue 2.0 és a legfrissebb verzió között megfigyelt fájl módosítások deltáit csoportosítja, azaz azt, hogy a két verzió között hány változtatás érintette az adott fájlokat. Ahogy várható, ez a hisztogram tökéletesen leköveti a 2.0-tól megfigyelt változtatási számokból képzett hisztogramokat, tovább erősítve az eddig megfigyelt trendeket.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue-all-lifetime-changes.png}
-    \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \caption{A vue legtöbbet módosított fájljainak alakulása 2016 és 2020 között}
+    \label{fig:vue-all-top-files}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue-all-lifetime-changes-comp-full.png}
-    \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \caption{A vue projekt összes fájljának módosítási számai}
+    \label{fig:vue-all-files-lifetime-changes}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue-all-lifetime-changes-delta-hist.png}
-    \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \caption{A vue projekt 2.0-ás és legfrissebb verzióiban lévő fájlok módosítási számainak deltái}
+    \label{fig:vue-all-delta-hist}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue-all-line-count.png}
     \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \label{fig:vue-all-line-count}
 \end{figure}
+
+Végül tekintsük a \ref{fig:vue-all-delta-hist} ábrát, amin a fájlok coverage-e látható. Kijelenthetjük, hogy a vue esetében a teszt coverage semmilyen moderáló hatást nem gyakorolt a változtatási gócpontokra, illetve a gócpontok növekedése nem hatott negatívan a unit tesztekre.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vue/vue-all-coverage.png}
     \caption{A vékony kliens által generált grafikonok}
-    \label{fig:hestia-charts}
+    \label{fig:vue-all-coverage}
 \end{figure}
-
-
 
 \begin{table}[h]
     \centering
@@ -244,8 +258,12 @@ Mielőtt levonnánk néhány tanulságot, nézzük meg, hogy hogyan alakult a vu
     \caption{}\label{tab:my-table}
 \end{table}
 
-\section{React}
+\subsection{Megfigyelések}
+
+A vue projekt elemzése összességében sok érdekes trendet tárt fel. Láttuk például, hogy a projekt születésétől kezdve gócpontot alkotó \code{compile.js} még egy teljes refactor után is ugyanazokat a mintákat mutatta, mint korábban.
+
+Megfigyeltük továbbá, hogy a projekt elején fennálló módosítási trendek szinte változatlanok maradnak a projekt élettartama során. Ebbe beleértendő az is, hogy új gócpontok nem igazán tudnak kialakulni, a komplexitás lokalitása változatlan marad.
+
+Végül láttuk azt is, hogy a coverage-nek semmilyen moderáló hatása nincs ezekre a negatív trendekre, hiszen a vue projekt gócpontjai kivétel nélkül 100\%-os coverage-el rendelkeznek. Igaz viszont az is, hogy a gócpontok növekedése nem vezetett a coverage romlásához sem.
 
 \section{Moment.js}
-
-\section{Összehasonlítás}
