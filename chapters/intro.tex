@@ -148,7 +148,7 @@ A pontos definíció ebben az esetben erősen vitatott, mert gyakorlatban a unit
 
 Definíciótól függetlenül azonban a unit tesztek célja világos: bizonyítsuk, hogy a kód, amit írtunk tényleg úgy viselkedik, ahogy szeretnénk és ez a verifikáció legyen könnyen és gyorsan megismételhető.
 
-Ellentétben a korábban már említett integrációs és E2E tesztekkel, a unit tesztek fehér doboz tesztek, ami azt jelenti, hogy a teszt maga részleteiben ismeri a tesztelt kódot, hiszen direkt interakcióban van vele
+Ellentétben a korábban már említett integrációs és E2E tesztekkel, a unit tesztek fehér doboz tesztek, ami azt jelenti, hogy a teszt maga részleteiben ismeri a tesztelt kódot, hiszen direkt interakcióban van vele.
 
 \begin{figure}[H]
     \centering
@@ -194,7 +194,7 @@ Reálisan nézve viszont sem a kódminőség, sem maga a szoftverfejlesztés nem
 
 A unit tesztelés és így a coverage hatása a sokkal kevésbé mérhető fejlesztői kultúrában manifesztálódik és csatlakozik ebben az aspektusában a statikus kódelemző eszközökhöz, mint a SonarQube\footnote{https://www.sonarqube.org/}, vagy a webes világból ismert linter-ek\footnote{https://eslint.org/}. Mind a unit tesztelés, mind a statikus kódelemzésnek a gyakorlati hatása a már korábban említett code smell-ek moderációjában mérhető. Ha egy fejlesztő csapat kötelezővé tesz egy bizonyos coverage értéket a kódbázison, akkor ez valamilyen formában önreflekcióra kényszeríti a fejlesztőket a tesztek írása közben, ami továbbá erősíti a fejlesztőkben a minőség-orientált kultúrát.
 
-Vegyük példának a \textit{God Object} code smell-t. Az ilyen osztályokat egy idő után nagyon nehéz tesztelni, mert egyrészt a külső függőségek száma az osztály méretével együtt nő, másrészt pedig az osztály belső állapota és komplexitása is folyamatosan nőni fog, amit egyre nehezebb tesztekben lekövetni. Ha van egy coverage gating a projekten és a fejlesztői kultúra része, hogy minőségi teszteket kell produkálni minden új funkcionalitáshoz, akkor a \textit{God Object} esetében két dolog történhet
+Vegyük példának a \textit{God Object} code smell-t. Az ilyen osztályokat egy idő után nagyon nehéz tesztelni, mert egyrészt a külső függőségek száma az osztály méretével együtt nő, másrészt pedig az osztály belső állapota és komplexitása is folyamatosan nőni fog, amit egyre nehezebb tesztekben lekövetni. Ha van egy coverage gating a projekten és a fejlesztői kultúra része, hogy minőségi teszteket kell produkálni minden új funkcionalitáshoz, akkor a \textit{God Object} esetében két dolog történhet:
 
 \begin{enumerate}
     \item Az osztály egyre tovább nő, egyre nehezebb teszteket írni az új funkcionalitásra, ami először frusztrációhoz, majd pedig jobb esetben reflekcióhoz vezet
@@ -204,6 +204,8 @@ Vegyük példának a \textit{God Object} code smell-t. Az ilyen osztályokat egy
 Az 1-es lehetőség eredménye általában az, hogy a fejlesztők elkezdik megkerülni a \textit{God Object}-et ahol csak lehet. Ez nem feltétlen ideális, de a frusztráció és indirekt reflekció az osztály működése miatt moderáló hatással lesz az osztály további növekedésére nézve ahhoz az esethez képest, ahol ugyanez az osztály mentes minden teszttől és duzzadhat tovább mindenféle kontroll nélkül.
 
 A 2-es az ideális eset. Ha maga az osztály kódja nem is, de a tesztek segítettek egyrészt felismerni a problémát, másrészt pedig elősegítették az osztály lebontását, ami hosszú távon egészségesebb kódhoz vezet.
+
+Ahelyett tehát, hogy minőségi metrikaként tekintünk a coverage-re, érdemesebb úgy gondolni rá, mint a kód karbantarthatóságának az egyik metrikája.
 
 \section{A teszt coverage és git statisztikák közös vizsgálata}
 
