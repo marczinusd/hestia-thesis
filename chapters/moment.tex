@@ -45,7 +45,7 @@ Egyelőre kijelenthetjük, hogy a moment kódbázisa ezen a ponton kifejezetten 
     \label{fig:moment-2.10.1-hist}
 \end{figure}
 
-Ugorjunk az időben a 2.20.1-es verzióhoz tartozó snapshot-ra, aminek a részletei a \ref{tab:moment-2.20.1} táblázatban láthatóak. Az ebből készített \ref{fig:moment-2.20.1-changes} ábra már jobban hasonlít a vue-nál látottakhoz: változtatások számának tekintetében polarizálódtak a fájlok néhány módosítási gócpont köré. A korábban már látott \code{moment.js} lett az egyik gócpont, illetve kiemelendő még a \code{from-string.js} segéd osztály. A \ref{fig:fig:moment-2.20.1-hist} ábrán is az látszik, hogy közelebb került a moment kódbázisa a korábban látottakhoz.
+Ugorjunk az időben a 2.20.1-es verzióhoz tartozó snapshot-ra, aminek a részletei a \ref{tab:moment-2.20.1} táblázatban láthatóak. Az ebből készített \ref{fig:moment-2.20.1-changes} ábra már jobban hasonlít a vue-nál látottakhoz: változtatások számának tekintetében polarizálódtak a fájlok néhány módosítási gócpont köré. A korábban már látott \code{moment.js} lett az egyik gócpont, illetve kiemelendő még a \code{from-string.js} segéd osztály. A \ref{fig:moment-2.20.1-hist} ábrán is az látszik, hogy közelebb került a moment kódbázisa a korábban látottakhoz.
 
 \begin{table}[h]
     \centering
@@ -111,7 +111,7 @@ Nézzük meg a moment.js végső kiadásának adatait. Mint látható a \ref{fig
 
 Végül érdemes még röviden szót ejteni a coverage trendekről, mivel a moment.js reprezentálja az analízisek között az olyan kódbázist, ahol megkérdőjelezhető a tesztelés mennyisége és minősége.
 
-Leszámítva az olyan anomáliákat, mint a \code{locale.js} és \code{ru.js} esetén eltűnő tesztek a 2.10.5-ös verziót követően, a kódbázis nagy részén
+Leszámítva az olyan anomáliákat, mint a \code{locale.js} és \code{ru.js} esetén eltűnő tesztek a 2.10.5-ös verziót követően, a kódbázis nagy részén a coverage változása és a változtatások száma között nincs korreláció. Pontosítva ha kihagyjuk a 0 coverage-el rendelkező fájlokat, amik torzítanák az eredményt, akkor azt látjuk, hogy a végső coverage és a változtatások száma között 0,06 (v2.10.5), -0,22 (v2.20.1) és -0,19 (dev) a korreláció, ami nem mutat konklúzív eredményre.
 
 \begin{figure}[H]
     \centering

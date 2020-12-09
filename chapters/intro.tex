@@ -127,9 +127,11 @@ A modern szoftverfejlesztés egyik legnagyobb előrelépése az volt, hogy siker
 
 \subsection{Magasabb szintű tesztek}
 
-A tesztelési piramis legfelsőbb szintjén találjuk az E2E, azaz end-to-end, vagy UI teszteket.
+A tesztelési piramis legfelsőbb szintjén találjuk az E2E, azaz end-to-end teszteket. E2E teszt alatt, ahogy a neve is mutatja egy olyan tesztet értünk, ami a teljes szoftvert teszteli, jellemzően vagy egy UI-ról vagy egy REST endpoint-ról elindulva. Az automatizált UI tesztek egy specializált, nagyon gyakran alkalmazott variánsát képezik az E2E teszteknek -- ezekkel azt lehet elérni, hogy a szoftver belső működésének ismerete nélkül teszteljük úgy a teljes szoftvert, mintha a felhasználók kezében lenne.
+A webes világban például a Selenium, WebDriver és Cypress segítségével leírhatjuk, hogy a tesztek milyen elemeket keressenek egy weboldalon, milyen interakciókat végezzenek ezeken az elemeken, illetve minek kell történnie az interakciók hatására.
 
-Közvetlenül az E2E tesztek alatt helyezkednek el az integration tesztek.
+Közvetlenül az E2E tesztek alatt helyezkednek el az integrációs tesztek. Az integrációs tesztek abból a szempontból hasonlítanak az E2E tesztekre, hogy a céljuk valamilyen szinten éles körülmények között tesztelni a kódbázis több rétegét. Az éles körülmények alatt jellemzően azt kell érteni, hogy a kód és egy külső erőforrás integrációját tesztelik.
+Például képzeljük el azt, hogy szeretnénk ellenőrizni, hogy a web service-ünk a megfelelő sorokat szúrja be a vele kapcsolatban álló adatbázissal. Ezt egy unit tesztben úgy ellenőriznénk, hogy az adatbázis absztrakció megfelelő függvényét ellenőriznénk, hogy meg lett-e hívva. Egy integrációs teszt esetében ugyanezt úgy ellenőrizzük, hogy magán az adatbázison nézzük meg, hogy az adott sor bekerült-e.
 
 \begin{figure}[H]
     \centering
@@ -140,7 +142,9 @@ Közvetlenül az E2E tesztek alatt helyezkednek el az integration tesztek.
 
 \subsection{Unit tesztelés}
 
-A tesztelési piramis legalsó szintjén található a unit tesztelés. \textit{Unit teszt} alatt egy olyan tesztet értünk, ami izolációban teszteli egy nagyon specifikus részét a kódnak. A pontos definíció ebben az esetben erősen vitatott, mert gyakorlatban a unit tesztelésnek több különböző stílusa létezik. Jellemzően ezek a stílusok eltérnek az izoláció mértékében, a tesztelt kód specificitásában és az ellenőrzések formájában is. Sok projekt továbbá kombinálja ezeket a különböző stílusokat az alkalmazás különböző rétegeiben.
+A tesztelési piramis legalsó szintjén található a unit tesztelés. \textit{Unit teszt} alatt egy olyan tesztet értünk, ami izolációban teszteli egy nagyon specifikus részét a kódnak. Izoláció alatt itt azt értjük, hogy a tesztelt egység függőségei mock-olva vannak, azaz teszt objektumokra vannak cserélve.
+
+A pontos definíció ebben az esetben erősen vitatott, mert gyakorlatban a unit tesztelésnek több különböző stílusa létezik. Jellemzően ezek a stílusok eltérnek az izoláció mértékében, a tesztelt kód specificitásában és az ellenőrzések formájában is. Sok projekt továbbá kombinálja ezeket a különböző stílusokat az alkalmazás különböző rétegeiben.
 
 Definíciótól függetlenül azonban a unit tesztek célja világos: bizonyítsuk, hogy a kód, amit írtunk tényleg úgy viselkedik, ahogy szeretnénk és ez a verifikáció legyen könnyen és gyorsan megismételhető.
 
