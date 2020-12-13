@@ -1,18 +1,36 @@
 \section{React}
 
-Utolsóként röviden a React\footnote{https://hu.reactjs.org/} kódbázisára fogunk kitérni. Az analízis rövidségének két oka van:
+Utolsóként röviden a React\footnote{https://hu.reactjs.org/} kódbázisára fogunk kitérni. A React a vue-hoz hasonlóan egy webes, JavaScript-alapú frontend könyvtár. A React erősen épít a funkcionális programozásból ismert koncepciókra és a webes világ HTML-CSS-JS szegregációjától eltér a JSX formátumával, ami ezt a hármat ötvözi.
+
+\lstset{language=JavaScript, caption={Egy egyszerű React komponens}}
+\begin{lstlisting}
+import React, { useState } from 'react';
+
+function Example() {
+    return (
+        <div>
+            <p>You clicked {count} times</p>
+            <button onClick={() => setCount(count + 1)}>
+                Click me
+            </button>
+        </div>
+    );
+}
+\end{lstlisting}
+
+Az analízis rövidségének két oka van:
 \begin{enumerate}
     \item A react kódbázisa több nagy refactor-on esett át, ami jelentősen megnehezíti a különböző verziók közötti kapcsolatok kialakítását. A snapshot-okat általában a különböző fájlok elérési útvonalain lehet csak összekapcsolni, mert a fájlok nevei nem egyediek, viszont az elérési útvonalak változása miatt csak egy nagyon kis szeletét lehetne megvizsgálni a projektnek
     \item A régebbi react kiadásokra nem lehet coverage report-okat generálni, mert a projekt egyik histórikus függősége egy az egyben el lett távolítva az npm-ről biztonsági okokból
 \end{enumerate}
 
 Ennek ellenére a react kódbázisa különösen érdekes lesz, mert egy olyan jelenséget produkál, amit a vue és a moment.js nem.
-Elsőként nézzük a React 14-es és 15-ös verziójának a legtöbbet módosított fájljait a \ref{fig:react-14-15-changes} ábrán. Eddig egyelőre nem látszik semmi különös, nagyon hasonló értékeket és mintákat látunk, mint a vue és a moment esetében.
+Elsőként nézzük a React 14-es és 15-ös verziójának a legtöbbet módosított fájljait a \ref{fig:react-14-15-changes} ábrán. Eddig egyelőre nem látszik semmi különös, nagyrészt hasonló értékeket és mintákat látunk, mint a vue és a moment esetében.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/react/react-14-15-changes.png}
-    \caption{Moment}
+    \caption{A React 14-es és 15-ös verziójának módosítási számai}
     \label{fig:react-14-15-changes}
 \end{figure}
 
@@ -46,13 +64,13 @@ Ebben az esetben azonban azonban ez az új architektúra hiába cseréli le a r�
         ReactFiberContext.js        & 0   & 0   & 44  \\
         ReactDOMComponent.js        & 38  & 38  & 38
     \end{tabular}
-    \caption{}
+    \caption{A React 16-os kiadása}
     \label{tab:react-all-changes}
 \end{table}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/react/react-all-changes.png}
-    \caption{Moment}
+    \caption{A React teljes kódbázisa a 14-es, 15-ös és 16-os kiadásokban}
     \label{fig:react-all-changes}
 \end{figure}
