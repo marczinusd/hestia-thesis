@@ -3,7 +3,7 @@
 
 A szoftverfejlesztés egyik népszerű tautológiája, hogy minőségi, hosszú távon is karbantartható szoftvert fejleszteni rendkívül nehéz. Ennek sok különböző oka, de a probléma központja az, hogy egyszerűen nehéz definiálni, hogy a "jó" és a "minőségi" szavak pontosan mit is jelentenek egy kódbázis esetében. Hiába áll közel a matematika egzakt természetéhez egy kontextus nélkül értelmezett kódsor, minél nagyobb halmazát nézzük távolról egy kódsor halmaznak, annál közelebb kerülünk a filozófiából ismerős minőség erősen homályos koncepciójához.
 
-A tapasztalatra hivatkozhatnánk a minőség egyik prediktoraként, hiszen ha valami bevált korábban több projekten, akkor egy n+1-edik projekten is működni fog. Ez a feltételezés természetesen nem állja meg a helyét. Amellett, hogy a status quo, vagy pontosabban a korábban hozott döntések kritikus vizsgálata előbb fog jó minőségű szoftverhez vezetni, mint annak a vak követése (népszerűbb nevén \textit{cargo cult prgoramozás}), azt is fontos megjegyezni, hogy egy szoftver projekt kontextusának csak egyik vektora a konkrét kód és a mögötte lévő követelmény. A fejlesztő csapat, a csapat és a csapatot alkalmazó cég kultúrája jelentősen torzítják a korábbi tapasztalat alkalmazásának hasznosságát. Melvin Conway programozó 1967-ben tett egy azóta elhíresült kijelentést, amelyre évtizedek óta csak Conway törvényeként\cite{conway} hivatkozunk:
+A tapasztalatra hivatkozhatnánk a minőség egyik prediktoraként, hiszen ha valami bevált korábban több projekten, akkor egy n+1-edik projekten is működni fog. Ez a feltételezés természetesen nem állja meg a helyét. Amellett, hogy a status quo, vagy pontosabban a korábban hozott döntések kritikus vizsgálata előbb fog jó minőségű szoftverhez vezetni, mint annak a vak követése (népszerűbb nevén \textit{cargo cult programozás}), azt is fontos megjegyezni, hogy egy szoftver projekt kontextusának csak egyik vektora a konkrét kód és a mögötte lévő követelmény. A fejlesztő csapat, a csapat és a csapatot alkalmazó cég kultúrája jelentősen torzítják a korábbi tapasztalat alkalmazásának hasznosságát. Melvin Conway programozó 1967-ben tett egy azóta elhíresült kijelentést, amelyre évtizedek óta csak Conway törvényeként\cite{conway} hivatkozunk:
 \begin{quotation}
     Any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure.
 \end{quotation}
@@ -20,7 +20,7 @@ Az ötlet egyszerű: minden olyan szoftverfejlesztési projekt, ahol a minőség
     \item Egy fájl, vagy fájlban lévő sor hány különböző szerző által lett módosítva
 \end{enumerate}
 
-A feltételezés, hogy a kódbázisok problémás részein kiemelkedően magas lesz a fent említett két szám az kódbázis többi részéhez képest. Továbbá feltehető az is, hogy azok a fájlok, amiken ez megfigyelhető, azok a fejlesztés korai szakaszaitól jelen vannak és a módosítások száma a projekt életciklusa alatt nagyjából konstans marad.
+A feltételezés, hogy a kódbázisok problémás részein kiemelkedően magas lesz a fent említett két szám a kódbázis többi részéhez képest. Továbbá feltehető az is, hogy azok a fájlok, amiken ez megfigyelhető, azok a fejlesztés korai szakaszaitól jelen vannak és a módosítások számának növekedése a projekt életciklusa alatt nagyjából konstans marad.
 
 Jogos kérdés lehet, hogy pontosan miért probléma az, hogy egy fájlt, illetve a benne lévő osztályt gyakran kell módosítani. Ehhez egy pillanatra hátra kell lépnünk és szót kell ejtenünk az úgynevezett code smell-ekről.
 
@@ -36,12 +36,12 @@ Fowler a könyvében 16 különböző code smell-t definiál, amiből nekünk a 
     \item \textit{Shotgun surgery}: egy kis változtatás sikeres végrehajtása csak sok osztály megváltoztatásával lehetséges
 \end{enumerate}
 
-Fontos megjegyezni, hogy a code smell, mint olyan, pusztán egy felületi heurisztika: egy kódrészlet, amire egy, vagy akár több code smell is illeszkedik, az a saját kontextusában lehet dizájn szempontból is helyes, hiszen minden szoftver projekt más. Az code smell-ek értéke abban rejlik, hogy a segítségükkel gyorsan fel tudunk ismerni gyakran előforduló problémás mintákat, majd egyéni mérlegelés után dönthetünk arról, hogy szükséges-e változtatást eszközölni a gyanús kódon.
+Fontos megjegyezni, hogy a code smell, mint olyan, pusztán egy felületi heurisztika: egy kódrészlet, amire egy, vagy akár több code smell is illeszkedik, az a saját kontextusában lehet dizájn szempontból is helyes, hiszen minden szoftver projekt más. Az code smell-ek értéke abban rejlik, hogy a segítségükkel gyorsan fel tudunk ismerni gyakran előforduló, problémás mintákat, majd egyéni mérlegelés után dönthetünk arról, hogy szükséges-e változtatást eszközölni a gyanús kódon.
 
 \section{Verziókezelő}
 \label{section:version_control}
 
-A verziókezelő szerves részeit képzik a modern szoftverfejlesztésnek. A fejlesztői körökben híres \textit{Joel Test}\footnote{https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/} legelső lakmusz-tesztje, hogy egy projekt minden forráskódjának valamilyen formában verziókezelőben kell lennie, máskülönben (Spolsky véleménye szerint) a fejlesztők csak a saját és a klienseik életét nehezítik meg.
+A verziókezelő szerves részeit képzik a modern szoftverfejlesztésnek. A fejlesztői körökben híres \textit{Joel Test}\footnote{\url{https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/}} legelső lakmusz-tesztje, hogy egy projekt minden forráskódjának valamilyen formában verziókezelőben kell lennie, máskülönben (Spolsky véleménye szerint) a fejlesztők csak a saját és a klienseik életét nehezítik meg.
 
 De mi is pontosan egy verziókezelő? Egy verziókezelő szoftver célja, hogy a forráskódon történő változtatások mindig világosan visszakövethetőek legyenek, egyértelműen látszódjon a változtatás előtti és utáni állapot és a forráskód akármelyik állapota akármikor elérhető és visszaállítható legyen. Fontos továbbá az is, hogy a verziókezelő rendszerek úgynevezett branch-ek használatával elősegítik, hogy egy fejlesztő csapat minden tagja képes legyen ugyanazokon a fájlokon más-más változtatásokat végrehajtani úgy, hogy a potenciálisan létrejött konfliktusokat csak egyszer kell feloldani.
 
@@ -85,7 +85,7 @@ Az igazi áttörést a git-nek a 2008-ban alapított GitHub hozta meg: a 2008-as
 \end{figure}
 
 
-Manapság a git a de factor verziókezelő rendszer mind ipari, mind nyílt forráskódú környezetekben, amitől csak nagyon specializált esetekben szokás eltérni -- ilyenek például az egyes tech óriások monorepository-jai, amik a cég teljes forráskódját hivatottak tárolni (ezek a cégek általában saját fejlesztésű verziókezelőt használnak), vagy az olyan projektek, ahol binárisok is verziókövetve vannak (a git teljesítményét már viszonylag kis mennyiségű követett bináris is nagyon érzékenyen érinti).
+Manapság a git a de facto verziókezelő rendszer mind ipari, mind nyílt forráskódú környezetekben, amitől csak nagyon specializált esetekben szokás eltérni -- ilyenek például az egyes tech óriások monorepository-jai, amik a cég teljes forráskódját hivatottak tárolni (ezek a cégek általában saját fejlesztésű verziókezelőt használnak), vagy az olyan projektek, ahol binárisok is verziókövetve vannak (a git teljesítményét már viszonylag kis mennyiségű követett bináris is nagyon érzékenyen érinti).
 
 Korábban már tisztáztunk pár alapvető koncepciót a verziókezelőkkel kapcsolatban, azonban a git megértéséhez pár másikról is szót kell ejteni.
 
@@ -95,7 +95,7 @@ Korábban már tisztáztunk pár alapvető koncepciót a verziókezelőkkel kapc
     \item \textit{Staging area}: a working copy-n végrehajtott változtatásokat a staging area-ba kell mozgatni, mielőtt azok egy commit-ba kerülhetnek, tehát egy
     \item \textit{Remote}: egy, a lokálistól különböző git repository, aminek a branch-eivel a push és pull műveletekkel tudunk interakcióba lépni. Fontos, hogy egy remote koncepcionálisan nem egy központi repository-t jelent, még akkor sem, ha gyakorlatban az szokott lenni -- egy remote lehet akár csak egy lokálisan tárolt másik másolata a repository-nak, a lényeg, hogy git repository legyen
     \item \textit{Push}: "toljuk fel" a lokális history-t a push-nak megadott távoli branch felé
-    \item \textit{Pull}: a push-al ellentétes művelet. Húzzunk le a remote egy adott branch-éről az ott lévő history-t a working copy-ba.
+    \item \textit{Pull}: a push-al ellentétes művelet. Húzzuk le a remote egy adott branch-éről az ott lévő history-t a working copy-ba.
 \end{itemize}
 
 \subsection{Code smell-ek nyomai a verziókezelőkben}
@@ -116,7 +116,7 @@ Ezekből a tanulságokból kifejezetten a 2-es pontot fogjuk megvizsgálni a \re
 
 \section{Tesztelés}
 
-A modern szoftverfejlesztés egyik nagy előrelépése az volt, hogy sikerült már az átlag fejlesztő fejébe is beültetni azt az egyszerű gondolatot, hogy az automatizált tesztelés minden projekten kritikus. Továbbá azt is egyre többen kezdik megérteni, hogy a teszt kód ugyanannyira fontos, mint az éles kód: a tesztek egyfajta kettős könyvelésként működnek a szoftverfejlesztés világában.
+A szoftverfejlesztés egyik nagy előrelépése az volt, hogy sikerült már az átlag fejlesztő fejébe is beültetni azt az egyszerű gondolatot, hogy az automatizált tesztelés minden projekten kritikus. Továbbá azt is egyre többen kezdik megérteni, hogy a teszt kód ugyanannyira fontos, mint az éles kód: a tesztek egyfajta kettős könyvelésként működnek a szoftverfejlesztés világában.
 
 \begin{figure}[H]
     \centering
@@ -124,6 +124,8 @@ A modern szoftverfejlesztés egyik nagy előrelépése az volt, hogy sikerült m
     \caption{Tesztelési piramis}
     \label{fig:testing-pyramid}
 \end{figure}
+
+Az automatizált tesztelésnek több különböző szintje van, amit a \ref{fig:testing-pyramid} ábrán látható tesztelési piramis is mutat. Röviden ezekről a tesztelési szintekről lesz most szó.
 
 \subsection{Magasabb szintű tesztek}
 
@@ -192,7 +194,7 @@ Az előbbiekből könnyen levonhatnánk konklúzióként, hogy a coverage kódmi
 
 Reálisan nézve viszont sem a kódminőség, sem maga a szoftverfejlesztés nem ennyire egzakt. Akárki, aki dolgozott legacy projekten tisztában van azzal, hogy mekkora a különbség egy olyan kódbázis között, ahol a legkisebb refactor-t is lehetetlen automatizáltan tesztelni és egy olyan között, ahol minden osztályt fed legalább egy pár viszonylag triviális teszt. Nyilvánvaló, hogy a code coverage önmagában egy gyenge metrika, azonban egyéni, fejlesztői szempontból a különbség egy 50\%-os és egy 98\%-os code coverage-el rendelkező projekt között távolról sem marginális.
 
-A unit tesztelés és így a coverage hatása a sokkal kevésbé mérhető fejlesztői kultúrában manifesztálódik és csatlakozik ebben az aspektusában a statikus kódelemző eszközökhöz, mint a SonarQube\footnote{https://www.sonarqube.org/}, vagy a webes világból ismert linter-ek\footnote{https://eslint.org/}. Mind a unit tesztelésnek, mind a statikus kódelemzésnek a gyakorlati hatása sokkal könnyebben észrevehető, ha egy projekt karbantarhatóságát nézzük. A teszteknek a hiánya nagyon könnyen képes olyan fejlesztői környezethez vezetni, ahol az emberek félnek változtatni olyan kódon, amikre egyrészt nincs teszt, másrészt a kód mögötti pontos követelmény már nem világos. Ezzel szemben egy jól tesztelt kódbázis egy bizonyos szinten dokumentálja saját magát. Az E2E tesztek a felhasználók elvárásait, az integrációs tesztek a szoftver éles körülményeit, a unit tesztek pedig a fejlesztők mikrodöntéseit kommunikálják.
+A unit tesztelés és így a coverage hatása a sokkal kevésbé mérhető fejlesztői kultúrában manifesztálódik és csatlakozik ebben az aspektusában a statikus kódelemző eszközökhöz, mint a SonarQube\footnote{\url{https://www.sonarqube.org/}}, vagy a webes világból ismert linter-ek\footnote{\url{https://eslint.org/}}. Mind a unit tesztelésnek, mind a statikus kódelemzésnek a gyakorlati hatása sokkal könnyebben észrevehető, ha egy projekt karbantarhatóságát nézzük. A teszteknek a hiánya nagyon könnyen képes olyan fejlesztői környezethez vezetni, ahol az emberek félnek változtatni olyan kódon, amikre egyrészt nincs teszt, másrészt a kód mögötti pontos követelmény már nem világos. Ezzel szemben egy jól tesztelt kódbázis egy bizonyos szinten dokumentálja saját magát. Az E2E tesztek a felhasználók elvárásait, az integrációs tesztek a szoftver éles körülményeit, a unit tesztek pedig a fejlesztők mikrodöntéseit kommunikálják.
 
 Érdemes tehát a code coverage-re a karbantarhatóság \textbf{egyik} metrikájaként gondolni.
 
@@ -202,3 +204,4 @@ Most, hogy körbejártuk mind a git statisztikákat, mind a tesztelési kérdés
 
 Azt könnyű belátni, hogy mind a git statisztikák, mind a code coverage hasonló koncepciókkal dolgoznak (fájl- és sorszintű, könnyen mérhető és szemrevételezhető heurisztikák), így kézenfekvő ötletnek tűnik a kettő együttes vizsgálata. A vizsgálat célja, hogy egyrészt maguknak a git statisztikáknak az evolúcióját próbáljuk értelmezni a kódbázisok élettartama alatt és ebből vonjunk le következtetéseket. A másodlagos cél az az, hogy nézzük meg milyen kapcsolatban áll a git statisztikák alakulása a teszt coverage-el. Van-e moderáló hatása a teszt coverage-nek a gyakran változtatott fájlokon? Hogy alakul a coverage ezeken a fájlokon -- konstans marad, romlik, vagy esetleg nő?
 
+Mielőtt ezeket a kérdéseket megvizsgálnánk, először nézzük meg a probléma vizsgálatára írt programokat.

@@ -7,24 +7,25 @@ Egy kódbázisnak a következő feltételeket kell teljesíteni, hogy vizsgálni
 \begin{enumerate}
     \item Legyen könnyen build-elhető, évekre visszamenően
     \item A tesztek legyenek könnyen futtathatóak
-    \item Generálódjon coverage report a teszt futtatásokhoz és a report formátuma legyen egyike azoknak, amiket támogat a ReportGenerator\footnote{https://github.com/danielpalme/ReportGenerator} nevű .NET-es könyvtár
+    \item Generálódjon coverage report a teszt futtatásokhoz és a report formátuma legyen egyike azoknak, amiket támogat a ReportGenerator\footnote{\url{https://github.com/danielpalme/ReportGenerator}} nevű .NET-es könyvtár
     \item A projekt legyen nyílt forráskódú
     \item Rendelkezzen a projekt viszonylag gazdag commit történettel -- jelen esetben az 5000+ commit és 3+ éves történet heurisztikát alkalmaztam
 \end{enumerate}
 
 Ezeket a feltételeket ugyan könnyű teljesíteni egy fejlesztő csapatnak ipari környezetben saját projektekre, sajnos nyílt forráskódú környezetben más a helyzet -- specifikusan az 1-es és 3-as pontok jelentenek problémát. A C++-ra, Python-ra és .NET Framework-re épülő projektek például egy az egyben kiesnek, mert egyik sem ad egyszerű módot arra, hogy a build-eléshez szükséges környezetet könnyen elő tudjuk állítani a projekt életciklusának akármely pontján.
 
-Gyakorlatban a JavaScript NodeJS/NPM, .NET Core/.NET 5+ és Java ökoszisztémákra épülő projektek felelhetnek meg a korábbi feltételeknek. Ezek közül azonban a Java a szakmai hátterem miatt kiesik, a .NET Core/5+ projektek jelentős többsége pedig az 5-ös feltételt nem teljesíteni, így marad a JavaScript Node/NPM ökoszisztéma. A specifikus projekteknél külön meg fogom említeni, de általánosságban itt is leírom: még a JavaScript/NodeJS/NPM ökoszisztéma esetén is komoly problémát jelent a régi (~2015 előtti) verziók build-elése, mivel az NPM és a node, illetve a rájuk épített projektek sok változáson estek át az évek során, amit ma a projekt ismerete nélkül már nehéz reprodukálni. Ez azt jelenti, hogy a legtöbb esetben lehetetlen
+Gyakorlatban a JavaScript NodeJS/NPM, .NET Core/.NET 5+ és Java ökoszisztémákra épülő projektek felelhetnek meg a korábbi feltételeknek. Ezek közül azonban a Java a szakmai hátterem miatt kiesik, a .NET Core/5+ projektek pedig az 5-ös feltételt nem teljesítik, így marad a JavaScript Node/NPM ökoszisztéma. A specifikus projekteknél külön meg fogom említeni, de általánosságban itt is leírom: még a JavaScript/NodeJS/NPM ökoszisztéma esetén is komoly problémát jelent a régi (~2015 előtti) verziók build-elése, mivel az NPM és a node, illetve a rájuk épített projektek sok változáson estek át az évek során, amit ma a projekt ismerete nélkül már nehéz reprodukálni. Ez azt jelenti, hogy a projektek evolúcióját nem lehet a kezdetektől indulva mérni, csak attól a ponttól kezdve, ahol már lehetséges egy sikeres build és teszt futtatás.
 
-Fontos leszögezni még egy dolgot. A JavaScript-es projektek elemzése egy jelentős vakfoltot fog képezni, méghozzá azért, mert a nyílt forráskódú projektek között gyakorlatilag lehetetlen olyat találni, amire őszintén azt lehet mondani, hogy rossz minőségű kódbázissal rendelkezik. Nyilván egy kódbázis minősége szubjektív, de a GitHub-on host-olt JavaScript projektek túlnyomó többsége 95\% feletti coverage-el rendelkezik. Ráadásul azok a projektek, amik 95\% alatt vannak, azok jellemzően csak a nagyon konzervatív coverage ignore path-ok miatt mutatnak ilyen értékeket -- a React projekt például 80\% körüli értéket mutatott, azonban hamar kiderült, hogy ez csak azért van, mert halott kódot tartanak a repository-ban, amit már nem hajtanak meg unit tesztek.
+Fontos leszögezni még egy dolgot. A JavaScript-es projektek elemzése egy jelentős vakfoltot fog képezni, méghozzá azért, mert a nyílt forráskódú projektek között gyakorlatilag lehetetlen olyat találni, amire igazak a fenti feltételek és az is, hogy alacsony coverage-el rendelkeznek, azaz nehezen karbantarthatóak. Több száz repository-t futottam, hogy olyat találjak, ami minőség vagy karbantarthatóság szempontjából első ránézésre "rossznak" tűnik, de a GitHub-on host-olt, a feltételeknek megfelelő projektek túlnyomó többsége 95\% feletti coverage-el rendelkezik. Ráadásul azok a projektek, amik 95\% alatt vannak, azok általában csak konzervatív coverage ignore path-ok, vagy archív, tesztek által már nem meghajtott, de nem éles kód miatt mutatnak ilyen értékeket.
 
 A fentieket figyelembe véve a következő projektekre esett a választás:
 \begin{itemize}
-    \item Vue: https://github.com/vuejs/vue
-    \item Express: https://github.com/expressjs/express
-    \item React: https://github.com/facebook/react
-    \item Gatsby: https://github.com/gatsbyjs/gatsby
+    \item Vue: \url{https://github.com/vuejs/vue}
+    \item Moment: \url{https://github.com/moment/moment}
+    \item React: \url{https://github.com/facebook/react}
 \end{itemize}
+
+Az analízishez felhasznált nyers adatok, illetve az azokból készített excel kimutatások elérhetőek GitHub-on: \url{https://github.com/marczinusd/hestia-thesis/tree/master/raw-data}
 
 \pagebreak
 \input{chapters/vue.tex}

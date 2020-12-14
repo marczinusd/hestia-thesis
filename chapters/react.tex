@@ -1,6 +1,6 @@
 \section{React}
 
-Utolsóként röviden a React\footnote{https://hu.reactjs.org/} kódbázisára fogunk kitérni. A React a vue-hoz hasonlóan egy webes, JavaScript-alapú frontend könyvtár. A React erősen épít a funkcionális programozásból ismert koncepciókra és a webes világ HTML-CSS-JS szegregációjától eltér a JSX formátumával, ami ezt a hármat ötvözi.
+Utolsóként röviden a React\footnote{\url{https://hu.reactjs.org/}} kódbázisára fogunk kitérni. A React a vue-hoz hasonlóan egy webes, JavaScript-alapú frontend könyvtár. A React erősen épít a funkcionális programozásból ismert koncepciókra és a webes világ HTML-CSS-JS szegregációjától eltér a JSX formátumával, ami ezt a hármat ötvözi.
 
 \lstset{language=JavaScript, caption={Egy egyszerű React komponens}}
 \begin{lstlisting}
@@ -21,11 +21,11 @@ function Example() {
 Az analízis rövidségének két oka van:
 \begin{enumerate}
     \item A react kódbázisa több nagy refactor-on esett át, ami jelentősen megnehezíti a különböző verziók közötti kapcsolatok kialakítását. A snapshot-okat általában a különböző fájlok elérési útvonalain lehet csak összekapcsolni, mert a fájlok nevei nem egyediek, viszont az elérési útvonalak változása miatt csak egy nagyon kis szeletét lehetne megvizsgálni a projektnek
-    \item A régebbi react kiadásokra nem lehet coverage report-okat generálni, mert a projekt egyik histórikus függősége egy az egyben el lett távolítva az npm-ről biztonsági okokból
+    \item A régebbi react kiadásokra nem lehet coverage report-okat generálni, mert a projekt egyik histórikus függősége egy az egyben el lett távolítva az NPM-ről biztonsági okokból
 \end{enumerate}
 
-Ennek ellenére a react kódbázisa különösen érdekes lesz, mert egy olyan jelenséget produkál, amit a vue és a moment.js nem.
-Elsőként nézzük a React 14-es és 15-ös verziójának a legtöbbet módosított fájljait a \ref{fig:react-14-15-changes} ábrán. Eddig egyelőre nem látszik semmi különös, nagyrészt hasonló értékeket és mintákat látunk, mint a vue és a moment esetében.
+Ennek ellenére a React kódbázisa különösen érdekes lesz, mert egy olyan jelenséget produkál, amit a Vue és a Moment.js nem.
+Elsőként nézzük a React 14-es és 15-ös verziójának a legtöbbet módosított fájljait a \ref{fig:react-14-15-changes} ábrán. Eddig egyelőre nem látszik semmi különös, nagyrészt hasonló értékeket és mintákat látunk, mint a Vue és a Moment esetében.
 
 \begin{figure}[H]
     \centering
@@ -36,7 +36,7 @@ Elsőként nézzük a React 14-es és 15-ös verziójának a legtöbbet módosí
 
 Vessünk azonban egy pillantást a \ref{tab:react-all-changes} táblázatra, amiben 16-os verzióban legtöbbet változtatott fájlok szerepelnek a histórikus módosítási adatokkal. Mint látható, a top 10-ben 9 olyan fájl van, amik nem léteztek a 16-os verziót megelőzően. Ez egy kis magyarázatra szorul.
 
-A React a 16-os kiadásban egy teljes új renderelő architektúrára váltott, ami Fiber\footnote{https://reactjs.org/blog/2017/09/26/react-v16.0.html\#new-core-architecture} kódnéven futott. Nyilvánvalóan egy frontend framework legkritikusabb része a DOM rendering, amit gyakorlatilag alapjaitól írtak újra a React fejlesztői. Ugyan ez a változtatás a 16-os verzióban került be az éles kódbázisba, egy párhuzamos branch-en akkor már évek óta aktív fejlesztés alatt állt.
+A React a 16-os kiadásban egy teljes új renderelő architektúrára váltott, ami Fiber\footnote{\url{https://reactjs.org/blog/2017/09/26/react-v16.0.html\#new-core-architecture}} kódnéven futott. Nyilvánvalóan egy frontend framework legkritikusabb része a DOM rendering, amit gyakorlatilag alapjaitól írtak újra a React fejlesztői. Ugyan ez a változtatás a 16-os verzióban került be az éles kódbázisba, egy párhuzamos branch-en akkor már régóta aktív fejlesztés alatt állt.
 
 Az eddigi megfigyelések azt mutatták, hogy amikor egy kódbázis elindul egy bizonyos irányba, akkor a korai módosítási minták medrében folyik a fejlesztés a projekt élete során. A react azonban jó példa arra, hogy ez nem feltétlenül igaz: ha a projekt új architektúrára vált, akkor ki lehet kerülni az előre lefektetett mintákat.
 

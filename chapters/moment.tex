@@ -1,10 +1,10 @@
 \section{Moment.js}
 
-A második mélyebben megvizsgált kódbázis a moment.js\footnote{https://momentjs.com/} lesz. A moment éveken át volt a de facto JavaScript-ben írt dátum-idő könyvtár, azonban 2020-ban különböző okoknál fogva a fejlesztése befejeződött.
+A második mélyebben megvizsgált kódbázis a moment.js\footnote{\url{https://momentjs.com/}} lesz. A moment éveken át volt a de facto JavaScript-ben írt dátum-idő könyvtár, azonban 2020-ban különböző okoknál fogva a fejlesztése befejeződött.
 
 A moment kódbázisa két szempontból lesz érdekes: egyrészt "késznek" tekinthető, másrészt egy nagyon jól definiált, kis problémát volt hivatott megoldani a kezdetekből.
 
-Ideális esetben a legelső kiadástól lenne érdemes kezdeni az analízist, azonban a moment 1.0 megjelenésekor sem unit tesztek, sem coverage report nem voltak a projekthez, ráadásul a kódbázis egy masszív JavaScript fájl volt. A moment 2.0 megjelenése azonban viszonylag közel van az 1.0-hoz és a 2.10.5-ös minor release-től kezdve elérhető a coverage report, úgyhogy az lesz a kezdőpont
+Ideális esetben a legelső kiadástól lenne érdemes kezdeni az analízist, azonban a moment 1.0 megjelenésekor sem unit tesztek, sem coverage report nem volt a projekthez, ráadásul a kódbázis egy darab, masszív JavaScript fájl volt. A moment 2.0 megjelenése azonban viszonylag közel van az 1.0-hoz és a 2.10.5-ös minor release-től kezdve elérhető a coverage report, úgyhogy az lesz a kezdőpont.
 
 A \ref{fig:moment-2.10.1-changes} ábrán látható az összes fájl módosítási száma és a fájlokhoz tartozó egyedi szerzők száma. Egy érdekes dolog már most megfigyelhető: ellentétben a vue-val, itt a szórás a különböző fájlok módosítási számai között viszonylag alacsony. Ehhez viszont hozzátartozik a korábban említett 1.0-ás kiadás, ahol a kódbázis egy \code{moment.js} nevű fájl volt, aminek a története egy újraírás miatt nem jelenik meg a 2.x-es kiadásokban.
 
@@ -17,7 +17,7 @@ A \ref{fig:moment-2.10.1-changes} ábrán látható az összes fájl módosítá
 
 A \ref{fig:moment-2.10.1-hist} ábrán látható hisztogram jól demonstrálja a kódbázis állapotát a 2.10.5-ös kiadásban. Ugyan technikailag itt is látható az a trend, hogy a fájlok túlnyomó többsége módosítások számát tekintve az alsó 40\%-ban van, azonban itt ez csalóka, hiszen az módosítások számának intervalluma csak 1-től 9-ig terjed.
 
-Egyelőre kijelenthetjük, hogy a moment kódbázisa ezen a ponton kifejezetten lapos a módosítási számok tekintetében, ami ha közelebbről megnézzük a kódbázist akkor érthető is: a logika nagy része a \code{moment.js} fájlban él, különböző kisebb segéd osztályokkal, mint a \code{from-anything.js}, végezetül pedig viszonylag ritkán változtatott lokalizációs fájlokban vannak definiálva a különböző dátum formátumok.
+Egyelőre kijelenthetjük, hogy a moment kódbázisa ezen a ponton kifejezetten lapos a módosítási számok tekintetében, ami ha közelebbről megnézzük a kódbázist akkor érthető is: a logika nagy része a \code{moment.js} fájlban él, különböző kisebb segédosztályokkal, mint a \code{from-anything.js}, végezetül pedig viszonylag ritkán változtatott lokalizációs fájlokban vannak definiálva a különböző dátum formátumok.
 
 \begin{table}[h]
     \centering
@@ -45,7 +45,7 @@ Egyelőre kijelenthetjük, hogy a moment kódbázisa ezen a ponton kifejezetten 
     \label{fig:moment-2.10.1-hist}
 \end{figure}
 
-Ugorjunk az időben a 2.20.1-es verzióhoz tartozó snapshot-ra, aminek a részletei a \ref{tab:moment-2.20.1} táblázatban láthatóak. Az ebből készített \ref{fig:moment-2.20.1-changes} ábra már jobban hasonlít a vue-nál látottakhoz: változtatások számának tekintetében polarizálódtak a fájlok néhány módosítási gócpont köré. A korábban már látott \code{moment.js} lett az egyik gócpont, illetve kiemelendő még a \code{from-string.js} segéd osztály. A \ref{fig:moment-2.20.1-hist} ábrán is az látszik, hogy közelebb került a moment kódbázisa a korábban látottakhoz.
+Ugorjunk az időben a 2.20.1-es verzióhoz tartozó snapshot-ra, aminek a részletei a \ref{tab:moment-2.20.1} táblázatban láthatóak. Az ebből készített \ref{fig:moment-2.20.1-changes} ábra már jobban hasonlít a vue-nál látottakhoz: változtatások számának tekintetében polarizálódtak a fájlok néhány módosítási gócpont köré. A korábban már látott \code{moment.js} lett az egyik gócpont, illetve kiemelendő még a \code{from-string.js} segédosztály. A \ref{fig:moment-2.20.1-hist} ábrán is az látszik, hogy közelebb került a moment kódbázisa a korábban látottakhoz.
 
 \begin{table}[h]
     \centering
